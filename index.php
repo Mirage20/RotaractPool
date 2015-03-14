@@ -72,7 +72,17 @@ and open the template in the editor.
                         We are Rotaract
 
                     </div>
-                    <a href="#register" class="btn btn-border-w btn-round section-scroll">Register Now</a>
+                    <?php
+                    if (isset($loginUrl)) {
+                        echo '<a href="#register" class="btn btn-border-w btn-round section-scroll">Register Now</a>';
+                    }
+                    if (isset($user)) {
+                        echo '<div class="hs-title-size-1  mb-30 text-color-white">';
+                        echo 'Hello ' . $user['name'] . '. You are registerd';
+                        echo '</div>';
+                    }
+                    ?>
+
                 </div>
             </div>
 
@@ -81,6 +91,7 @@ and open the template in the editor.
 
         <div class="main">
 
+            <!-- Details start -->
             <section id="details" class="module">
                 <div class="container">
 
@@ -111,13 +122,13 @@ and open the template in the editor.
 
                 </div><!-- .container -->
             </section>
-            <!-- About end -->
+            <!-- Details end -->
 
             <!-- Divider -->
             <hr class="divider-w">
             <!-- Divider -->
 
-            <!-- About start -->
+            <!-- Register start -->
             <section id="register" class="module">
                 <div class="container">
 
@@ -145,8 +156,12 @@ and open the template in the editor.
 
                             <div class="large-text align-center">
                                 <?php
-                                if (isset($user)) {
-                                    echo 'User ' . $user['name'] . ' is registerd';
+                                if (isset($alradyReg)) {
+                                    echo 'User ' . $user['name'] . ' is alrady registerd';
+                                }else{
+                                    if (isset($user)) {
+                                        echo 'User ' . $user['name'] . ' is registerd';
+                                    }
                                 }
                                 ?>
                             </div>
@@ -157,12 +172,13 @@ and open the template in the editor.
 
                 </div><!-- .container -->
             </section>
-            <!-- About end -->
+            <!-- Register end -->
 
             <!-- Divider -->
             <hr class="divider-w">
             <!-- Divider -->
 
+            <!-- Rules start -->
             <section id="rules" class="module">
                 <div class="container">
 
@@ -297,9 +313,11 @@ and open the template in the editor.
 
                 </div><!-- .container -->
             </section>
-            <!-- Features end -->
+            <!-- Rules end --> 
+
             <hr class="divider-w">
 
+            <!-- About start --> 
             <section id="about" class="module">
                 <div class="container">
 
@@ -426,6 +444,7 @@ and open the template in the editor.
 
                 </div>
             </section>
+            <!-- About end -->
         </div>
 
         <script src="js/jquery-2.1.3.min.js"></script>
