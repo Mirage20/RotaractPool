@@ -129,7 +129,7 @@ and open the template in the editor.
             <!-- Divider -->
 
             <!-- Register start -->
-            <section id="register" class="module">
+            <section id="register" class="module-register">
                 <div class="container">
 
                     <div class="row">
@@ -139,32 +139,147 @@ and open the template in the editor.
                             <h2 class="module-title font-alt">Register Now</h2>
                             <div class="module-subtitle font-serif large-text">
                                 <p> Integre quaerendum mel ut, an cum putant pericula constituam, et quem dolorem vel.</p>
-                                <?php
-                                if (isset($loginUrl)) {
-                                    echo '<a href="' . $loginUrl . '" > Register with Facebook </a>';
-                                }
-                                ?>
+
+
                             </div>
 
                         </div>
 
                     </div><!-- .row -->
 
+                    <?php
+                    if (isset($loginUrl)) {
+                        ?>
+                        <div class="row">
+                            <!--<div class="col-sm-4"></div>-->
+                            <div class="module-subtitle">
+                                <?php echo '<a href="' . $loginUrl . '" class="btn btn-primary"> Register with Facebook </a>'; ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
                     <div class="row">
 
-                        <div class="col-sm-2 col-sm-offset-5">
+                        <div class="col-lg-6 col-lg-offset-3">
 
-                            <div class="large-text align-center">
-                                <?php
-                                if (isset($alradyReg)) {
-                                    echo 'User ' . $user['name'] . ' is alrady registerd';
-                                }else{
-                                    if (isset($user)) {
-                                        echo 'User ' . $user['name'] . ' is registerd';
-                                    }
+                            <?php
+                            if (isset($alradyReg)) {
+                                echo 'User ' . $user['name'] . ' is alrady registerd';
+                                $showUpdateForm = TRUE;
+                            } else {
+                                if (isset($user)) {
+                                    echo 'User ' . $user['name'] . ' is registerd';
+                                    $showUpdateForm = TRUE;
                                 }
+                            }
+                            ?>
+                            <?php
+                            if (isset($showUpdateForm)) {
                                 ?>
-                            </div>
+                                <div class="well">
+                                    <form class="form-horizontal" method="POST">
+                                        <fieldset>
+                                            <legend>Register</legend>
+                                            <div class="form-group">
+                                                <label for="inputTeamName" class="col-lg-2 control-label">Team</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" name="teamName" placeholder="Team Name" 
+                                                           value="<?php
+                                                           if (isset($user['teamName'])) {
+                                                               echo $user['teamName'];
+                                                           }
+                                                           ?>">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">Gender</label>
+                                                <div class="col-lg-10">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="gender" value="male" 
+                                                            <?php
+                                                            if (isset($user['gender']) && $user['gender'] == 'male') {
+                                                                echo 'checked';
+                                                            }
+                                                            ?>>
+                                                            Male
+                                                        </label>
+                                                        <label></label>
+                                                        <label>
+                                                            <input type="radio" name="gender" value="female"
+                                                            <?php
+                                                            if (isset($user['gender']) && $user['gender'] == 'female') {
+                                                                echo 'checked';
+                                                            }
+                                                            ?>>
+                                                            Female
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!--                                            <div class="form-group">
+                                                                                            <label for="select" class="col-lg-2 control-label">Category</label>
+                                                                                            <div class="col-lg-10">
+                                                                                                <select class="form-control" name="category">
+                                                                                                    <option>Singles</option>
+                                                                                                    <option>Double</option>                                                  
+                                                                                                </select>
+                                            
+                                                                                            </div>
+                                                                                        </div>-->
+                                            <div class="form-group">
+                                                <label for="inputCategory" class="col-lg-2 control-label">Category</label>
+                                                <div class="col-lg-10">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="single" value="single" 
+                                                            <?php
+                                                            if (isset($user['playType']) && (($user['playType'] == 'single') || ($user['playType'] == 'single and double') )) {
+                                                                echo 'checked';
+                                                            }
+                                                            ?>> Single
+                                                        </label>
+                                                        <label></label>
+                                                        <label>
+                                                            <input type="checkbox" name="double" value="double"
+                                                            <?php
+                                                            if (isset($user['playType']) && (($user['playType'] == 'double') || ($user['playType'] == 'single and double') )) {
+                                                                echo 'checked';
+                                                            }
+                                                            ?>> Double
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-10 col-lg-offset-2">
+                                                    <button type="submit" class="btn btn-default">Update</button>
+                                                    <?php
+                                                    if (isset($updateSuccess)) {
+                                                        ?>
+                                                        <label></label>
+                                                        <label></label>
+                                                        <label>
+                                                            <span class="label label-success">Successfully updated.</span>
+                                                        </label>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </div>
+
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <?php
+                            }
+                            ?>
+
 
                         </div>
 

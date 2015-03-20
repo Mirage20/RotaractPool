@@ -237,6 +237,18 @@ and open the template in the editor.
     padding-top: 40vh;
 }
 
+.module-register{
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+    padding-top: 15vh;
+}
+
 .module-small {
     padding: 70px 0;
 }

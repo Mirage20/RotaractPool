@@ -44,7 +44,10 @@ session_start();
 
 $app_id = '1556187094660763';
 $app_secret = 'a31b026061e609b2bdd2dd19feb0112e';
+//For development
 $redirect_url = 'http://localhost/RotractPool/index.php#register';
+//For deploy
+//$redirect_url = 'https://rotract-pool.herokuapp.com/index.php';
 
 $servername = "us-cdbr-iron-east-02.cleardb.net";
 $username = 'b5e414713a7502';
@@ -84,24 +87,62 @@ if (isset($sessionFB)) {
         'url' => $graph->getLink(),
         'email' => $graph->getProperty('email')
     );
+    print_r($_POST);
 
     $userID = $user['id'];
     $sqlCheckUser = "SELECT * FROM `register` WHERE `userID`='$userID'";
     $sqlResult = $dbConn->query($sqlCheckUser);
     if ($sqlResult->num_rows > 0) {
         if (!isset($_SESSION['facebook_token'])) {
-            $alradyReg=TRUE;
+            $alradyReg = TRUE;
         }
+        if (isset($_POST) && !empty($_POST)) {
+            $gender = $_POST['gender'];
+
+            if (isset($_POST['teamName'])) {
+                $teamName = $_POST['teamName'];
+            } else {
+                $teamName = null;
+            }
+
+            if (isset($_POST['single']) && isset($_POST['double'])) {
+                $playType = $_POST['single'] . " and " . $_POST['double'];
+            } else if (isset($_POST['single'])) {
+                $playType = $_POST['single'];
+            } else if (isset($_POST['double'])) {
+                $playType = $_POST['double'];
+            }
+            $sqlUpdateUser = "UPDATE register"
+                    . " SET `gender`='$gender',"
+                    . "`teamName`='$teamName',"
+                    . "`playType`='$playType' WHERE `userID`='$userID'";
+            if ($dbConn->query($sqlUpdateUser) === FALSE) {
+                die("Something went wrong.Please refresh the page and try again. ");
+            }
+            $updateSuccess=TRUE;
+        }
+        $sqlResult = $dbConn->query($sqlCheckUser);
+        $row = $sqlResult->fetch_row();
+        print_r($row);
+        $user['gender'] = $row[3];
+        $user['teamName'] = $row[5];
+        $user['playType'] = $row[6];
     } else {
 
         $name = $user['name'];
         $email = $user['email'];
         $url = $user['url'];
+        $gender = 'Male';
+        $teamName = null;
+        $playType = 'Singles';
+        $user['gender'] = $gender;
+        $user['teamName'] = $teamName;
+        $user['playType'] = $playType;
         $sqlInsertUser = "INSERT INTO register"
-                . " VALUES ('$userID', '$name', '$email', '$url')";
+                . " VALUES ('$userID', '$name', '$email','$gender', '$url','$teamName','$playType')";
         if ($dbConn->query($sqlInsertUser) === FALSE) {
-            die("Something went wrong.Please refresh the page and try again.");
-        } 
+            die("Something went wrong.Please refresh the page and try again. ");
+        }
     }
     $_SESSION['facebook_token'] = $sessionFB->getToken();
 } else {
