@@ -42,3 +42,56 @@ $('a.section-scroll').click(function() {
     }, 1500);
     return false;
 });
+
+ function validateUpdateForm() {
+        var teamName = document.forms["updateForm"]["teamName"].value;
+        var gender = document.forms["updateForm"]["gender"].value;
+        var chkSingle = document.forms["updateForm"]["single"].checked;
+        var chkDouble = document.forms["updateForm"]["double"].checked;
+        
+ 
+        var error=0;
+        
+        if (chkDouble && (teamName === null || teamName === "")) {                    
+            var fgTeamName = document.getElementById("fgTeamName");             
+            fgTeamName.className += " has-error";
+            showValidateError('Double category must have a team name');
+            error=1;
+        }
+        
+        if (!chkSingle && !chkDouble) {                    
+            var fgCategory = document.getElementById("fgCategory");       
+            fgCategory.className += " has-error";
+            showValidateError('Please select at least one category.');
+            error=1;
+        }
+        
+        if (gender === null || gender === "") {                               
+            showValidateError('Please select your gender.');
+            error=1;
+        }
+        
+        
+                
+        if(error ===1)
+        {
+            return false;
+        }
+        
+    }
+
+    function showValidateError(message) {
+
+        var errorBox = document.getElementById("validateError");
+        var messegeHTML ='<span class="label label-danger">'+message+'</span>';
+        errorBox.innerHTML=messegeHTML;
+
+    }
+    
+    function hideValidateError(message) {
+
+        var errorBox = document.getElementById("validateError");
+        var messegeHTML ='';
+        errorBox.innerHTML=messegeHTML;
+
+    }

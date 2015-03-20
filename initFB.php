@@ -87,7 +87,7 @@ if (isset($sessionFB)) {
         'url' => $graph->getLink(),
         'email' => $graph->getProperty('email')
     );
-    print_r($_POST);
+    //print_r($_POST);
 
     $userID = $user['id'];
     $sqlCheckUser = "SELECT * FROM `register` WHERE `userID`='$userID'";
@@ -123,7 +123,7 @@ if (isset($sessionFB)) {
         }
         $sqlResult = $dbConn->query($sqlCheckUser);
         $row = $sqlResult->fetch_row();
-        print_r($row);
+        //print_r($row);
         $user['gender'] = $row[3];
         $user['teamName'] = $row[5];
         $user['playType'] = $row[6];

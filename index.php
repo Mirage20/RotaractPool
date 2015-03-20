@@ -163,26 +163,28 @@ and open the template in the editor.
                     <div class="row">
 
                         <div class="col-lg-6 col-lg-offset-3">
-
-                            <?php
-                            if (isset($alradyReg)) {
-                                echo 'User ' . $user['name'] . ' is alrady registerd';
-                                $showUpdateForm = TRUE;
-                            } else {
-                                if (isset($user)) {
-                                    echo 'User ' . $user['name'] . ' is registerd';
+                            <div class="reg-finish-messege">
+                                <?php
+                                if (isset($alradyReg)) {
+                                    echo '<span class="label label-warning"> User ' . $user['name'] . ' is alrady registerd</span>';
                                     $showUpdateForm = TRUE;
+                                } else {
+                                    if (isset($user)) {
+
+                                        echo '<span class="label label-primary"> User ' . $user['name'] . ' is registerd</span>';
+                                        $showUpdateForm = TRUE;
+                                    }
                                 }
-                            }
-                            ?>
+                                ?>
+                            </div>
                             <?php
                             if (isset($showUpdateForm)) {
                                 ?>
                                 <div class="well">
-                                    <form class="form-horizontal" method="POST">
+                                    <form class="form-horizontal" name="updateForm" onsubmit="return validateUpdateForm();" method="POST">
                                         <fieldset>
-                                            <legend>Register</legend>
-                                            <div class="form-group">
+                                            <legend>Update Information</legend>
+                                            <div id="fgTeamName" class="form-group">
                                                 <label for="inputTeamName" class="col-lg-2 control-label">Team</label>
                                                 <div class="col-lg-10">
                                                     <input type="text" class="form-control" name="teamName" placeholder="Team Name" 
@@ -232,7 +234,7 @@ and open the template in the editor.
                                             
                                                                                             </div>
                                                                                         </div>-->
-                                            <div class="form-group">
+                                            <div id="fgCategory" class="form-group">
                                                 <label for="inputCategory" class="col-lg-2 control-label">Category</label>
                                                 <div class="col-lg-10">
                                                     <div class="checkbox">
@@ -259,6 +261,9 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <div class="col-lg-10 col-lg-offset-2">
                                                     <button type="submit" class="btn btn-default">Update</button>
+                                                    <label id="validateError">
+
+                                                    </label>
                                                     <?php
                                                     if (isset($updateSuccess)) {
                                                         ?>
