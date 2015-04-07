@@ -239,13 +239,8 @@ and open the template in the editor.
 
 .module-register{
     position: relative;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100vh;
+    
+    height: auto;
     padding-top: 15vh;
 }
 

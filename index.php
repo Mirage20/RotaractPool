@@ -1,4 +1,4 @@
-<?php require 'initFB.php'; ?>
+<?php require 'initDB.php'; ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -72,16 +72,8 @@ and open the template in the editor.
                         We are Rotaract
 
                     </div>
-                    <?php
-                    if (isset($loginUrl)) {
-                        echo '<a href="#register" class="btn btn-border-w btn-round section-scroll">Register Now</a>';
-                    }
-                    if (isset($user)) {
-                        echo '<div class="hs-title-size-1  mb-30 text-color-white">';
-                        echo 'Hello ' . $user['name'] . '. You are registerd';
-                        echo '</div>';
-                    }
-                    ?>
+
+                    <a href="#register" class="btn btn-border-w btn-round section-scroll">Register Now</a>;
 
                 </div>
             </div>
@@ -147,143 +139,179 @@ and open the template in the editor.
 
                     </div><!-- .row -->
 
-                    <?php
-                    if (isset($loginUrl)) {
-                        ?>
-                        <div class="row">
-                            <!--<div class="col-sm-4"></div>-->
-                            <div class="module-subtitle">
-                                <?php echo '<a href="' . $loginUrl . '" class="btn btn-primary"> Register with Facebook </a>'; ?>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                    ?>
+
+
 
                     <div class="row">
 
                         <div class="col-lg-6 col-lg-offset-3">
                             <div class="reg-finish-messege">
                                 <?php
-                                if (isset($alradyReg)) {
-                                    echo '<span class="label label-warning"> User ' . $user['name'] . ' is alrady registerd</span>';
-                                    $showUpdateForm = TRUE;
-                                } else {
-                                    if (isset($user)) {
-
-                                        echo '<span class="label label-primary"> User ' . $user['name'] . ' is registerd</span>';
-                                        $showUpdateForm = TRUE;
-                                    }
+                                if (isset($userExist) && $userExist === TRUE) {
+                                    echo '<span class="label label-warning"> You are alrady registerd</span>';
                                 }
                                 ?>
                             </div>
-                            <?php
-                            if (isset($showUpdateForm)) {
-                                ?>
-                                <div class="well">
-                                    <form class="form-horizontal" name="updateForm" onsubmit="return validateUpdateForm();" method="POST">
-                                        <fieldset>
-                                            <legend>Update Information</legend>
-                                            <div id="fgTeamName" class="form-group">
-                                                <label for="inputTeamName" class="col-lg-2 control-label">Team</label>
-                                                <div class="col-lg-10">
-                                                    <input type="text" class="form-control" name="teamName" placeholder="Team Name" 
-                                                           value="<?php
-                                                           if (isset($user['teamName'])) {
-                                                               echo $user['teamName'];
-                                                           }
-                                                           ?>">
+
+                            <div class="well">
+                                <form class="form-horizontal" name="registerForm" onsubmit="return validateRegisterForm();" method="POST" action="#register">
+                                    <fieldset>
+                                        <legend>Register</legend>
+
+                                        <div id="fgEmail" class="form-group">
+                                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" name="email" placeholder="Email" >
+                                            </div>
+                                        </div>
+
+                                        <div id="fgName" class="form-group">
+                                            <label for="inputEmail" class="col-lg-2 control-label">Name</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" name="name" placeholder="Name" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Gender</label>
+                                            <div class="col-lg-10">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="gender" value="male" checked="">
+                                                        Male
+                                                    </label>
+                                                    <label></label>
+                                                    <label>
+                                                        <input type="radio" name="gender" value="female">
+                                                        Female
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="fgCategory" class="form-group">
+                                            <label for="inputCategory" class="col-lg-2 control-label">Category</label>
+                                            <div class="col-lg-10">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="single" value="single" checked=""> 
+                                                        Single
+                                                    </label>
+                                                    <label></label>
+                                                    <label>
+                                                        <input type="checkbox" name="double" value="double"> 
+                                                        Double
+                                                    </label>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div id="fgTeamName" class="form-group">
+                                            <label for="inputTeamName" class="col-lg-2 control-label">Team</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" name="teamName" placeholder="Team Name">
+                                            </div>
+                                        </div>
 
 
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label">Gender</label>
-                                                <div class="col-lg-10">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="gender" value="male" 
-                                                            <?php
-                                                            if (isset($user['gender']) && $user['gender'] == 'male') {
-                                                                echo 'checked';
-                                                            }
-                                                            ?>>
-                                                            Male
-                                                        </label>
-                                                        <label></label>
-                                                        <label>
-                                                            <input type="radio" name="gender" value="female"
-                                                            <?php
-                                                            if (isset($user['gender']) && $user['gender'] == 'female') {
-                                                                echo 'checked';
-                                                            }
-                                                            ?>>
-                                                            Female
-                                                        </label>
-                                                    </div>
+                                        <div id="fgDetailPartner" class="form-group">
+                                            <label class="col-lg-3 control-label">Partner Details</label>
+
+                                        </div>
+
+                                        <div id="fgEmailPartner" class="form-group">
+                                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" name="email2" placeholder="Email Partner" >
+                                            </div>
+                                        </div>
+
+                                        <div id="fgNamePartner" class="form-group">
+                                            <label for="inputEmail" class="col-lg-2 control-label">Name</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" name="name2" placeholder="Name Partner" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Gender</label>
+                                            <div class="col-lg-10">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="gender2" value="male" checked="">
+                                                        Male
+                                                    </label>
+                                                    <label></label>
+                                                    <label>
+                                                        <input type="radio" name="gender2" value="female">
+                                                        Female
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="fgCategory" class="form-group">
+                                            <label for="inputCategory" class="col-lg-2 control-label">Category</label>
+                                            <div class="col-lg-10">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="single2" value="Yes"> 
+                                                        Single
+                                                    </label>
 
                                                 </div>
                                             </div>
-                                            <!--                                            <div class="form-group">
-                                                                                            <label for="select" class="col-lg-2 control-label">Category</label>
-                                                                                            <div class="col-lg-10">
-                                                                                                <select class="form-control" name="category">
-                                                                                                    <option>Singles</option>
-                                                                                                    <option>Double</option>                                                  
-                                                                                                </select>
-                                            
-                                                                                            </div>
-                                                                                        </div>-->
-                                            <div id="fgCategory" class="form-group">
-                                                <label for="inputCategory" class="col-lg-2 control-label">Category</label>
-                                                <div class="col-lg-10">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="single" value="single" 
-                                                            <?php
-                                                            if (isset($user['playType']) && (($user['playType'] == 'single') || ($user['playType'] == 'single and double') )) {
-                                                                echo 'checked';
-                                                            }
-                                                            ?>> Single
-                                                        </label>
-                                                        <label></label>
-                                                        <label>
-                                                            <input type="checkbox" name="double" value="double"
-                                                            <?php
-                                                            if (isset($user['playType']) && (($user['playType'] == 'double') || ($user['playType'] == 'single and double') )) {
-                                                                echo 'checked';
-                                                            }
-                                                            ?>> Double
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-lg-10 col-lg-offset-2">
-                                                    <button type="submit" class="btn btn-default">Update</button>
-                                                    <label id="validateError">
+                                        </div>
 
+
+
+                                        <!--                                            <div class="form-group">
+                                                                                        <label for="select" class="col-lg-2 control-label">Category</label>
+                                                                                        <div class="col-lg-10">
+                                                                                            <select class="form-control" name="category">
+                                                                                                <option>Singles</option>
+                                                                                                <option>Double</option>                                                  
+                                                                                            </select>
+                                        
+                                                                                        </div>
+                                                                                    </div>-->
+                                        <div class="form-group">
+                                            <div class="col-lg-10 col-lg-offset-2">
+                                                <div class="g-recaptcha" data-sitekey="6Lfi-gQTAAAAADjTnx_QEHgbw8Uqm8Jwg90pKosB"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-10 col-lg-offset-2">
+                                                <button type="submit" class="btn btn-default">Register</button>
+                                                <label id="validateError">
+
+                                                </label>
+                                                <?php
+                                                if (isset($registerSuccess)) {
+                                                    ?>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label>
+                                                        <span class="label label-success">Successfully Registered.</span>
                                                     </label>
                                                     <?php
-                                                    if (isset($updateSuccess)) {
-                                                        ?>
-                                                        <label></label>
-                                                        <label></label>
-                                                        <label>
-                                                            <span class="label label-success">Successfully updated.</span>
-                                                        </label>
-                                                        <?php
-                                                    }
+                                                } else if (isset($captchaError)) {
                                                     ?>
-                                                </div>
-
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label>
+                                                        <span class="label label-warning">Please validate the captcha.</span>
+                                                    </label>
+                                                    <?php
+                                                }
+                                                ?>
                                             </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                                <?php
-                            }
-                            ?>
+
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
 
 
                         </div>
@@ -569,6 +597,7 @@ and open the template in the editor.
 
         <script src="js/jquery-2.1.3.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
         <script src="js/custom.js"></script>
     </body>
 </html>
