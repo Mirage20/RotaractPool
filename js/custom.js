@@ -20,6 +20,21 @@ $(document).ready(function() {
 
         navbarAnimation(navbar, homeSection, navHeight);
     });
+    
+    $('#singleselect').prop('checked',false);
+    $('#double-section').hide();
+    $('#doubleselect').click(function(){
+        if($('#doubleselect').prop('checked')){
+            $('#double-section').slideToggle('slow',function(){
+                $('#double-section').show();
+            });
+        }
+        else{
+            $('#double-section').slideToggle('slow',function(){
+                $('#double-section').hide();
+            });
+        }
+    });
 });
 
 

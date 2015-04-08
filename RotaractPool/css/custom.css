@@ -110,7 +110,7 @@ and open the template in the editor.
     background-position: center 80%;
     width: 100%;
     z-index: 0;
-    height: auto; /*new changes*/
+    height: auto; 
     top: 0px;
     background-image: url(../img/home_bg.jpg);
     background-size: cover;
@@ -233,15 +233,22 @@ and open the template in the editor.
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 100vh;
+    height: auto;
     padding-top: 40vh;
+    min-height: 100vh;
 }
 
 .module-register{
     position: relative;
-    
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     height: auto;
-    padding-top: 15vh;
+    padding-top: 100px; //new changes
+    min-height: 100vh; 
 }
 
 .module-small {
@@ -259,13 +266,11 @@ and open the template in the editor.
 }
 
 .module-subtitle {
-    /*new changes*/
-/*    text-align: center;*/
+    //new changes
+/*    text-align: center;*/ 
     font-size: 16px;
     color: #111;
     margin-bottom: 70px;
-    padding-left: 10px;     /*new changes*/
-    padding-right: 10px;    /*new changes*/
 }
 
 .module-icon {
@@ -344,15 +349,15 @@ and open the template in the editor.
         transform: rotate(360deg);
     }
 }
-/*new changes*/
-#home.home-section,
-.caption-content,
-.hs-caption,
+
+
+
 #details.module,
 #register.module-register,
-#rules.module{
-    min-height: 100vh;
-    height: auto;
+#rules.module,
+#about.module,
+#home.home-section{
+    min-height: 100vh; 
 }
 
 .paragraph{
@@ -360,4 +365,5 @@ and open the template in the editor.
     padding-top: 10px;
     float: left;
 }
-/*new changes*/
+
+//new changes
