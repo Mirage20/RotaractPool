@@ -353,6 +353,7 @@ and open the template in the editor.
 #rules.module{
     min-height: 100vh;
     height: auto;
+    padding-top: 15vh;
 }
 
 .paragraph{

@@ -26,8 +26,9 @@ if ($dbConn->connect_error) {
 $userExist = FALSE;
 
 if (isset($_POST) && !empty($_POST)) {
-
-    $captcha = $_POST['g-recaptcha-response'];
+    if (isset($_POST['g-recaptcha-response']) )
+        $captcha = $_POST['g-recaptcha-response'];
+    
     if (isset($captcha) && !empty($captcha)) {
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6Lfi-gQTAAAAAAx5ZfFZZD4QytUH6zxz_aU6bxYC&response=" . $captcha);
         $jsonResponse = json_decode($response, true);

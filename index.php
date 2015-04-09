@@ -99,7 +99,7 @@ and open the template in the editor.
 
                                         membership of Rotaract and Rotary Clubs together to compete, to interact and to have fun. </p>
                                 </div>
-                                
+
                                 <div class="row paragraph">
                                     <p> With the need for relaxation and entertainment of the membership of most educational 
 
@@ -107,7 +107,7 @@ and open the template in the editor.
 
                                         to Rotaract Mora calendar. </p>
                                 </div>
-                                
+
                                 <div class="row paragraph">
                                     <p> RPS will bring the rotarians and rotaractors to one door step which will lead them to an 
 
@@ -117,7 +117,7 @@ and open the template in the editor.
 
                                         and stressful work and will ensure a quality time well spent. </p>
                                 </div>
-                                
+
                                 <div class="row paragraph">
                                     <p> In the belief that “Rotaract Pool Smashes” will firmly establish itself as a much-awaited 
 
@@ -125,7 +125,7 @@ and open the template in the editor.
 
                                         Queens café Kollupitiya from 10 am to 6 pm.</p>
                                 </div>
-                                
+
                                 <!--new changes-->
                             </div>
 
@@ -162,11 +162,11 @@ and open the template in the editor.
                         <div class="col-sm-8 col-sm-offset-2">
 
                             <h2 class="module-title font-alt">Register Now</h2>
-                            <div class="module-subtitle font-serif large-text">
-                                <p> Integre quaerendum mel ut, an cum putant pericula constituam, et quem dolorem vel.</p>
-
-
-                            </div>
+                            <!--                            <div class="module-subtitle font-serif large-text">
+                                                            <p>:P</p>
+                            
+                            
+                                                        </div>-->
 
                         </div>
 
@@ -311,7 +311,8 @@ and open the template in the editor.
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-10 col-lg-offset-2">
-                                                <div class="g-recaptcha" data-sitekey="6Lfi-gQTAAAAADjTnx_QEHgbw8Uqm8Jwg90pKosB"></div>
+                                                <!--<div class="g-recaptcha" data-sitekey="6Lfi-gQTAAAAADjTnx_QEHgbw8Uqm8Jwg90pKosB"></div>-->
+                                                <div id="recaptcha"></div>
                                             </div>
                                         </div>
                                         <div class="form-group">
