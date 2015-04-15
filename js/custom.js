@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var recaptchaResponse=null;
+var recaptchaResponse = null;
 var verifyCallback = function(response) {
-    recaptchaResponse=response;
+    recaptchaResponse = response;
 };
 
 var onloadCallbackCaptcha = function() {
@@ -15,9 +15,11 @@ var onloadCallbackCaptcha = function() {
     });
 };
 
+new WOW().init();
+
 $(window).load(function() {
     $('.loader').fadeOut();
-    $('.page-loader').delay(350).fadeOut('slow');
+    $('.load-background').delay(350).fadeOut('slow');
     onloadCallbackCaptcha();
 });
 
@@ -27,7 +29,38 @@ $(document).ready(function() {
     var navbar = $('.navbar-custom');
     var navHeight = navbar.height();
 
+    $('#show-popup-description-male').click(function() {
+        document.getElementById('popup-description-male').style.display = 'block';
+    });
+    
+    $('#show-popup-description-female').click(function() {
+        document.getElementById('popup-description-female').style.display = 'block';
+    });
+    
+    $('#show-popup-description-double').click(function() {
+        document.getElementById('popup-description-double').style.display = 'block';
+    });
+    
+    $('#show-popup-description-general').click(function() {
+        document.getElementById('popup-description-general').style.display = 'block';
+    });
 
+    $('#hide-popup-description-male').click(function() {
+        document.getElementById('popup-description-male').style.display = 'none';
+    });
+    
+    $('#hide-popup-description-female').click(function() {
+        document.getElementById('popup-description-female').style.display = 'none';
+    });
+    
+    $('#hide-popup-description-double').click(function() {
+        document.getElementById('popup-description-double').style.display = 'none';
+    });
+    
+    $('#hide-popup-description-general').click(function() {
+        document.getElementById('popup-description-general').style.display = 'none';
+    });
+    
     $(window).scroll(function() {
 
         navbarAnimation(navbar, homeSection, navHeight);
@@ -86,7 +119,7 @@ function validateRegisterForm() {
 
     var error = 0;
 
-    if(recaptchaResponse === null || recaptchaResponse === "")
+    if (recaptchaResponse === null || recaptchaResponse === "")
     {
         showValidateError('Please validate the captcha.');
         error = 1;
